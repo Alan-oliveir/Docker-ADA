@@ -93,7 +93,7 @@ services:
 
 - **ports**: Mapeia as portas do host para as portas do contêiner. Neste exemplo, a porta 80 do host é mapeada para a porta 80 do contêiner. Isso significa que o serviço dentro do contêiner que estiver ouvindo na porta 80 estará acessível do lado de fora do contêiner através da porta 80 do host.
 
-## Executação inicial
+## Execução inicial
 
 ![terminal docker compose up](./img/dockerComposeUp.png)
 
@@ -101,3 +101,42 @@ Acessando o http://localhost:80 podemos conferir que a aplicação está rodando
 
 ![project todo](./img/firstDemoWeb.png)
 
+## Adicionando banco de dados e volumes para a aplicação
+
+Para expandir as configurações do projeto e incluir um serviço de banco de dados PostgreSQL (db) utilizando segredos (Secrets) para gerenciar informações sensíveis, como senhas e etc. Algumas modifições foram necessárias no ```compose.yaml```:
+
+### Modificando o compose.yaml para banco de dados
+![modification compose pt1](./img/composept1.png)
+
+![modification compose pt2](./img/composept2.png)
+
+Resumidamente, para explicar o que modificamos:
+
+- **services**: Esta seção ainda define os serviços que compõem a aplicação. Agora, há dois serviços, "server" e "db".
+
+  - **server**: Configurações para o serviço da aplicação. As variáveis de ambiente relacionadas ao PostgreSQL indicam como a aplicação se conectará ao banco de dados.
+
+  - **db**: Configurações para o serviço do banco de dados PostgreSQL. Usa a imagem oficial do PostgreSQL. As configurações incluem volume para persistência de dados, exposição da porta 5432, e um healthcheck para verificar a disponibilidade do PostgreSQL.
+
+- **depends_on**: Garante que o serviço "server" só será iniciado após o serviço "db" estar saudável. Isso não garante que o PostgreSQL dentro do serviço "db" está totalmente inicializado, apenas que o contêiner está em execução.
+
+- **secrets**: Permite o uso de segredos para gerenciar informações sensíveis. Neste caso, um segredo chamado "db-password" é definido para armazenar a senha do PostgreSQL. O arquivo de senha é lido do caminho especificado no host (`db/password.txt`) e é disponibilizado para os serviços no caminho `/run/secrets/db-password` dentro dos contêineres.
+
+- **volumes**: Define um volume chamado "db-data" que é utilizado para persistir os dados do PostgreSQL. Isso é essencial para garantir que os dados não se percam quando o contêiner é reiniciado.
+
+- **secrets**: Define o segredo chamado "db-password" e especifica o arquivo no host que contém a senha. Este segredo é então referenciado nos serviços que precisam da senha, como "server" e "db".
+
+> [!WARNING]  
+> Antes de realizar o ```docker compose up``` novamente, vale ressaltar que deve ser criado uma pasta contendo um arquivo ```password.text```, responsável por passar a senha da aplicação, assim como modificamos e explicamos anteriormente.
+
+![create password file](./img/password.png)
+
+## Etapas finais
+
+Com tudo finalizado e configurado certinho, podemos executar novamente o comando ```docker compose up``` e ver o resultado:
+
+### terminal
+![terminal compose](./img/terminalcompose.png)
+
+### Projeto final
+![Final Project Demo](./img/finalproject.png)
