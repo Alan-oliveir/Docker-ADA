@@ -2,6 +2,14 @@
 
 Essa aplicação NodeJS foi pegada da documentação do Docker, sendo possível acessa-la por [aqui](https://docs.docker.com/language/nodejs/containerize/). Nela, temos todos os passo a passo de como conteineriza-la e sincronizar com um banco de dados.
 
+## Grupo 5 - Turma #1099
+
+- Vinicius Piotto
+- Andrea Gonçalves
+- Alan de Oliveira Gonçalves
+- Jucilene Lemos Barboza
+- André Felipe
+
 ## Clonando a aplicação
 
 O primeiro passo é clonar a aplicação, ou seja, um pré-requisito desse projeto é você ter a ferramenta Git instalada em sua máquina.
