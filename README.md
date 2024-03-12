@@ -1,4 +1,4 @@
-# Conteinerizando uma aplicacão NodeJS
+# Conteinerizando uma aplicação NodeJS
 
 Essa aplicação NodeJS foi pegada da documentação do Docker, sendo possível acessa-la por [aqui](https://docs.docker.com/language/nodejs/containerize/). Nela, temos todos os passo a passo de como conteineriza-la e sincronizar com um banco de dados.
 
@@ -27,7 +27,7 @@ Existem duas formas de criar os arquivos Docker na sua aplicação, a maneira ma
 docker init
 ```
 
-> [!IMPORTANT]  
+> [!IMPORTANTE]  
 > Vale ressaltar que nesse ponto, deve estar instaldo e configurado o Docker na sua máquina para que tudo ocorra certo.
 
 Algumas perguntas básicas serão feitas após o comando:
@@ -42,7 +42,7 @@ Nessa etapa, é de grande importancia, pois, vamos ter que passar o caminho no q
 
 ![Path to index.js](./img/tree-application.png)
 
-Com o comando finalizado, foram criados vários arquivos. Mas vamos analisar os 2 mais importantes
+Com o comando finalizado, foram criados vários arquivos. Mas vamos analisar os 2 mais importantes a seguir:
 
 ## Dockerfile
 
